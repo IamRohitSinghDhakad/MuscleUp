@@ -28,6 +28,7 @@ class AppSideMenuViewController: UIViewController {
     @IBOutlet var imgVwUser: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionMenuTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var vwBg: UIView!
     
     var selectedIndexpath = 0
     var strBadgeCount = ""
@@ -55,9 +56,24 @@ class AppSideMenuViewController: UIViewController {
         sideMenuController?.delegate = self
     }
     
+    
+    func setThemeColor(){
+        if let value = UserDefaults.standard.value(forKey: UserDefaults.Keys.strGender)as? String{
+            
+            if value == "Male"{
+                self.vwBg.backgroundColor = UIColor.init(named: "AppBlue")
+            }else{
+                self.vwBg.backgroundColor = UIColor.init(named: "AppPink")
+            }
+        }else{
+            self.vwBg.backgroundColor = UIColor.init(named: "AppBlue")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("badge count update")
+        
+        self.setThemeColor()
 
     }
     
@@ -67,15 +83,15 @@ class AppSideMenuViewController: UIViewController {
         }, with: "0")
         
         sideMenuController?.cache(viewControllerGenerator: {
-            self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
+            self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController")
         }, with: "1")
         
         sideMenuController?.cache(viewControllerGenerator: {
-            self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
+            self.storyboard?.instantiateViewController(withIdentifier: "SubscriptionViewController")
         }, with: "2")
         
         sideMenuController?.cache(viewControllerGenerator: {
-            self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
+            self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController")
         }, with: "3")
         
         sideMenuController?.cache(viewControllerGenerator: {

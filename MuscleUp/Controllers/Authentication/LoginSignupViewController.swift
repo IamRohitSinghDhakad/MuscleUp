@@ -31,6 +31,7 @@ class LoginSignupViewController: UIViewController {
     
     @IBOutlet var btnLogin: UIButton!
     
+    @IBOutlet var vwBtnBg: UIView!
     
     var isSignup:Bool = false
     
@@ -40,6 +41,13 @@ class LoginSignupViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.setUpForLogin()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       // self.view.setBgColor()
+    }
+
     
     func setUpForLogin(){
         self.vwFullName.isHidden = true
@@ -79,16 +87,42 @@ class LoginSignupViewController: UIViewController {
         
     }
     @IBAction func btnMale(_ sender: Any) {
+        UserDefaults.standard.setValue("Male", forKey: UserDefaults.Keys.strGender)
+      
         
     }
     @IBAction func btnFemale(_ sender: Any) {
-        
+        UserDefaults.standard.setValue("Female", forKey: UserDefaults.Keys.strGender)
+       
     }
     @IBAction func btnOnLoginSignup(_ sender: Any) {
         self.pushVc(viewConterlerId: "VerificationCodeViewController") 
     }
     
     @IBAction func btnRegisterLogin(_ sender: Any) {
+        
+    }
+}
+
+//MARK:- Validations
+extension LoginSignupViewController{
+    
+    
+    
+}
+
+
+extension UIView{
+    func setBgColor(){
+        if let value = UserDefaults.standard.value(forKey: UserDefaults.Keys.strGender)as? String{
+            if value == "Male"{
+                self.backgroundColor = UIColor.init(named: "AppBlue")
+            }else{
+                self.backgroundColor = UIColor.init(named: "AppPink")
+            }
+        }else{
+            self.backgroundColor = UIColor.init(named: "AppBlue")
+        }
         
     }
 }

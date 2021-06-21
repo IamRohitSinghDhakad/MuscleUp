@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,12 @@
 		F914CC32267F6CFC0038C110 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC31267F6CFC0038C110 /* SettingViewController.swift */; };
 		F914CC35267F6D290038C110 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC34267F6D290038C110 /* MealsViewController.swift */; };
 		F914CC37267F6D3A0038C110 /* MealsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC36267F6D3A0038C110 /* MealsDetailViewController.swift */; };
+		F914CC3A267F79E30038C110 /* SubscriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC39267F79E30038C110 /* SubscriptionCollectionViewCell.swift */; };
+		F914CC3C267F79FE0038C110 /* SubscriptionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC3B267F79FE0038C110 /* SubscriptionListTableViewCell.swift */; };
+		F914CC3F267F7AB40038C110 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC3E267F7AB40038C110 /* SettingTableViewCell.swift */; };
+		F914CC42267F81EF0038C110 /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC41267F81EF0038C110 /* MealsTableViewCell.swift */; };
 		F927AAF2267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F927AAF1267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift */; };
+		F9C5047E267FB713005C179C /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C5047D267FB713005C179C /* PrivacyPolicyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +102,12 @@
 		F914CC31267F6CFC0038C110 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F914CC34267F6D290038C110 /* MealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		F914CC36267F6D3A0038C110 /* MealsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsDetailViewController.swift; sourceTree = "<group>"; };
+		F914CC39267F79E30038C110 /* SubscriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		F914CC3B267F79FE0038C110 /* SubscriptionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListTableViewCell.swift; sourceTree = "<group>"; };
+		F914CC3E267F7AB40038C110 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		F914CC41267F81EF0038C110 /* MealsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
 		F927AAF1267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9C5047D267FB713005C179C /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +136,6 @@
 				DBC892495AD92B0A48E73371 /* Pods-MuscleUp.debug.xcconfig */,
 				AEAE56B6C0C42272B591D21C /* Pods-MuscleUp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -169,6 +178,7 @@
 		F90595AC267D0D36008864AA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F9C5047C267FB6ED005C179C /* TermsService */,
 				F914CC33267F6D1B0038C110 /* Meal */,
 				F914CC2C267F6CB30038C110 /* Profile */,
 				F914CC2B267F6C1C0038C110 /* Subscription */,
@@ -336,6 +346,7 @@
 		F914CC2A267F6C0F0038C110 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F914CC3D267F7AA70038C110 /* Cell */,
 				F914CC31267F6CFC0038C110 /* SettingViewController.swift */,
 			);
 			path = Settings;
@@ -344,6 +355,7 @@
 		F914CC2B267F6C1C0038C110 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				F914CC38267F78DA0038C110 /* Cell */,
 				F914CC2F267F6CEA0038C110 /* SubscriptionViewController.swift */,
 			);
 			path = Subscription;
@@ -360,10 +372,36 @@
 		F914CC33267F6D1B0038C110 /* Meal */ = {
 			isa = PBXGroup;
 			children = (
+				F914CC40267F81E30038C110 /* Cell */,
 				F914CC34267F6D290038C110 /* MealsViewController.swift */,
 				F914CC36267F6D3A0038C110 /* MealsDetailViewController.swift */,
 			);
 			path = Meal;
+			sourceTree = "<group>";
+		};
+		F914CC38267F78DA0038C110 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F914CC39267F79E30038C110 /* SubscriptionCollectionViewCell.swift */,
+				F914CC3B267F79FE0038C110 /* SubscriptionListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F914CC3D267F7AA70038C110 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F914CC3E267F7AB40038C110 /* SettingTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F914CC40267F81E30038C110 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F914CC41267F81EF0038C110 /* MealsTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F927AAF0267F2C0A00FEF6F4 /* Cell */ = {
@@ -373,6 +411,14 @@
 				F914CC25267F64E10038C110 /* TrainerCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		F9C5047C267FB6ED005C179C /* TermsService */ = {
+			isa = PBXGroup;
+			children = (
+				F9C5047D267FB713005C179C /* PrivacyPolicyViewController.swift */,
+			);
+			path = TermsService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,6 +541,7 @@
 				F90595B0267D0D5B008864AA /* LoginSignupViewController.swift in Sources */,
 				F90595DE267D22D5008864AA /* TransitionContext.swift in Sources */,
 				F914CC32267F6CFC0038C110 /* SettingViewController.swift in Sources */,
+				F914CC3C267F79FE0038C110 /* SubscriptionListTableViewCell.swift in Sources */,
 				F90595BA267D1671008864AA /* MessageConstant.swift in Sources */,
 				F914CC2E267F6CD90038C110 /* ProfileViewController.swift in Sources */,
 				F905959D267CFED6008864AA /* ViewController.swift in Sources */,
@@ -509,7 +556,10 @@
 				F90595EC267D230D008864AA /* AppSideMenuViewController.swift in Sources */,
 				F90595E7267D22D5008864AA /* RDTextView.swift in Sources */,
 				F90595ED267D230D008864AA /* AppSideMenuTableViewCell.swift in Sources */,
+				F914CC3F267F7AB40038C110 /* SettingTableViewCell.swift in Sources */,
 				F90595DD267D22D5008864AA /* Delegate.swift in Sources */,
+				F914CC3A267F79E30038C110 /* SubscriptionCollectionViewCell.swift in Sources */,
+				F914CC42267F81EF0038C110 /* MealsTableViewCell.swift in Sources */,
 				F90595B9267D1671008864AA /* AlertViewController.swift in Sources */,
 				F914CC29267F6B690038C110 /* CategoryDetailViewController.swift in Sources */,
 				F90595C0267D1E31008864AA /* VerificationCodeViewController.swift in Sources */,
@@ -519,6 +569,7 @@
 				F90595E5267D22D5008864AA /* SWRevealViewController+Extensions.swift in Sources */,
 				F905959B267CFED6008864AA /* SceneDelegate.swift in Sources */,
 				F914CC30267F6CEA0038C110 /* SubscriptionViewController.swift in Sources */,
+				F9C5047E267FB713005C179C /* PrivacyPolicyViewController.swift in Sources */,
 				F90595BD267D1671008864AA /* CustomUIView.swift in Sources */,
 				F90595DB267D22D5008864AA /* StatusBar.swift in Sources */,
 				F90595BB267D1671008864AA /* ValidationManager.swift in Sources */,

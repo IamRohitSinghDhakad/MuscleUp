@@ -9,10 +9,29 @@ import UIKit
 
 class MealsDetailViewController: UIViewController {
 
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var btnBackOnHeader: UIButton!
+    @IBOutlet var imgVwMeal: UIImageView!
+    @IBOutlet var lblMealTitle: UILabel!
+    @IBOutlet var txtVwMealDesc: UITextView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.setBgColor()
+    }
+    
+    
+    
+    
+    @IBAction func btnBackOnHeader(_ sender: Any) {
+        self.onBackPressed()
     }
     
 

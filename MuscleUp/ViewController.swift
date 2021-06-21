@@ -12,7 +12,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pushVc(viewConterlerId: "LoginSignupViewController")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.pushVc(viewConterlerId: "LoginSignupViewController")
+        }
+       
         // Do any additional setup after loading the view.
     }
 

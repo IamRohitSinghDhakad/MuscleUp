@@ -15,7 +15,8 @@ class HomeViewController: UIViewController {
     @IBOutlet var hgtConsCvCategories: NSLayoutConstraint!
     @IBOutlet var cvTrainer: UICollectionView!
     
-    var arrCategory = [String]()
+    var arrCategory = ["Chest","Shoulder","Legs","Biceps","Abs","Triceps"]
+    var arrImages = [UIImage.init(named: "one_home"),UIImage.init(named: "two_home"),UIImage.init(named: "three_home"),UIImage.init(named: "four_home"),UIImage.init(named: "five_home"),UIImage.init(named: "six_home")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,14 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.setBgColor()
+    }
+    
+    
+  
     @IBAction func actionBtnOpenSideMenu(_ sender: Any) {
         self.sideMenuController?.revealMenu()
     }
@@ -37,6 +46,9 @@ class HomeViewController: UIViewController {
         self.hgtConsCvCategories?.constant = self.cvCategories.contentSize.height
     }
     
+    @IBAction func btnGoToMeal(_ sender: Any) {
+        self.pushVc(viewConterlerId: "MealsViewController")
+    }
 }
 
 
@@ -45,7 +57,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         if collectionView == self.cvTrainer{
             return 3
         }else{
-            return 6//self.arrCategory.count
+            return self.arrCategory.count//self.arrCategory.count
         }
        
     }
@@ -59,21 +71,32 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
                 return cellTrainer
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath)as! HomeCollectionViewCell
-                
-    //           let objCategory = self.arrCategory[indexPath.row]
-    //
-    //            cell.lblTitle.text = objCategory.strCategoryName
-    //
-    //            let profilePic = objCategory.strCategoryImage
-    //
-    //            if profilePic != "" {
-    //                let url = URL(string: profilePic)
-    //                cell.imgvwCategory.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
-    //            }
-                
-                
-                return cell
-          
+            
+            let objCategory = self.arrCategory[indexPath.row]
+            
+            cell.lblCategory.text = objCategory
+            
+            cell.imgVw.image = self.arrImages[indexPath.row]
+            //
+            //            let profilePic = objCategory.strCategoryImage
+            //
+            //            if profilePic != "" {
+            //                let url = URL(string: profilePic)
+            //                cell.imgvwCategory.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
+            //            }
+            
+            
+            return cell
+            
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == cvCategories{
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoryDetailViewController")as! CategoryDetailViewController
+            vc.strTitle = self.arrCategory[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -111,8 +134,4 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        self.viewWillLayoutSubviews()
- //   }
 }

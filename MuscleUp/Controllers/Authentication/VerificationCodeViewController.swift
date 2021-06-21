@@ -15,12 +15,19 @@ class VerificationCodeViewController: UIViewController {
     @IBOutlet var tfThree: UITextField!
     @IBOutlet var tfFour: UITextField!
     @IBOutlet var lblTimer: UILabel!
+    @IBOutlet var vwBtnBg: UIView!
     
     //MARK:- App Lyf Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setOTPWork()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       // self.view.setBgColor()
     }
     
 

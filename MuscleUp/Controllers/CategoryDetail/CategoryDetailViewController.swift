@@ -15,11 +15,22 @@ class CategoryDetailViewController: UIViewController {
     @IBOutlet var lblTitleText: UILabel!
     @IBOutlet var txtVwDesc: UITextView!
     
+    
+    var strTitle = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.lblTitle.text = self.strTitle
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.setBgColor()
+    }
+    
+    
     
 
     @IBAction func btnOnPlayMedia(_ sender: Any) {
