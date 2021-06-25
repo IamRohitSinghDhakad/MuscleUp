@@ -35,3 +35,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+//Manage AutoLogin
+extension AppDelegate {
+    
+    func LoginNavigation(){
+        let sb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        navController = sb.instantiateViewController(withIdentifier: "LoginNav") as? UINavigationController
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func HomeNavigation() {
+        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "SideMenuController")
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+       
+//        let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
+//        let navController = UINavigationController(rootViewController: vc)
+//        navController.isNavigationBarHidden = true
+//        appDelegate.window?.rootViewController = navController
+    }
+    
+    func settingRootController() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let vc = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        //        let navController = UINavigationController(rootViewController: setViewController)
+        appDelegate.window?.rootViewController = vc
+    }
+    
+}
+
+
+

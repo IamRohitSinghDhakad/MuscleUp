@@ -12,6 +12,8 @@ class MealsViewController: UIViewController {
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var tblMealPlan: UITableView!
     
+     
+    
     var arrMeals = ["BreakFast Meal","Snack Meal", "Lunch Meal", "Dinner Meal"]
     var arrMealsImage = [UIImage.init(named: "one_meal"), UIImage.init(named: "two_meal"), UIImage.init(named: "three_meal"),UIImage.init(named: "four_meal")]
     
@@ -20,6 +22,8 @@ class MealsViewController: UIViewController {
 
         self.tblMealPlan.delegate = self
         self.tblMealPlan.dataSource = self
+        
+        self.call_WsGetMeals()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,3 +65,59 @@ extension MealsViewController:UITableViewDelegate,UITableViewDataSource{
     
     
 }
+
+//MARK:- Call Webservice Get Meals List
+
+extension MealsViewController{
+    
+    func call_WsGetMeals(){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+       // objWebServiceManager.showIndicator()
+        
+        let dict = ["sex":"Male"]as [String:Any]
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getMeals, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            if status == MessageConstant.k_StatusCode{
+                if let category_data  = response["result"] as? [[String:Any]] {
+                    if category_data.count != 0{
+                        
+//                        for data in category_data{
+//                            let obj = CategoryModel.init(dict: data)
+//                            self.arrCategory.append(obj)
+//                        }
+//                        
+//                        self.cvCategories.reloadData()
+                    }
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
+}
+
+
+

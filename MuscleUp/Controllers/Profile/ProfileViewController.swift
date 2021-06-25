@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController,UINavigationControllerDelegate {
     @IBOutlet var imgVwUser: UIImageView!
     @IBOutlet var tfUserName: UITextField!
     @IBOutlet var tfEmail: UITextField!
@@ -17,14 +17,21 @@ class ProfileViewController: UIViewController {
     @IBOutlet var btnPhoneEdit: UIButton!
     @IBOutlet var vwBtnBg: UIView!
     
+    
+    var imagePicker = UIImagePickerController()
+    var pickedImage:UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.imagePicker.delegate = self
+        
         self.btnUserNameEdit.tag = 0
         self.btnEmailEdit.tag = 1
         self.btnPhoneEdit.tag = 2
         
         self.disableAlltextField()
+        self.call_WsGetProfile()
         // Do any additional setup after loading the view.
     }
     
@@ -36,6 +43,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func btnOnuploadImage(_ sender: Any) {
+        self.setImage()
     }
     
     @IBAction func btnBackOnheader(_ sender: Any) {
@@ -73,6 +81,163 @@ class ProfileViewController: UIViewController {
     
     @IBAction func btnOnSave(_ sender: Any) {
         
+    }
+}
+
+// MARK:- UIImage Picker Delegate
+extension ProfileViewController: UIImagePickerControllerDelegate{
+    
+    func setImage(){
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        let alert:UIAlertController=UIAlertController(title: "Choose Image", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertAction.Style.default)
+        {
+            UIAlertAction in
+            self.openCamera()
+        }
+        
+        let galleryAction = UIAlertAction(title: "Gallery", style: UIAlertAction.Style.default)
+        {
+            UIAlertAction in
+            self.openGallery()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel)
+        {
+            UIAlertAction in
+        }
+        alert.addAction(cameraAction)
+        alert.addAction(galleryAction)
+        alert.addAction(cancelAction)
+        alert.popoverPresentationController?.sourceView = self.view
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Open camera
+    func openCamera()
+    {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+        {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.modalPresentationStyle = .fullScreen
+            self .present(imagePicker, animated: true, completion: nil)
+        } else {
+            self.openGallery()
+        }
+    }
+    
+    // Open gallery
+    func openGallery()
+    {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.modalPresentationStyle = .fullScreen
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            self.pickedImage = editedImage
+            self.imgVwUser.image = self.pickedImage
+            //  self.cornerImage(image: self.imgUpload,color:#colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1) ,width: 0.5 )
+            
+            self.makeRounded()
+            if self.imgVwUser.image == nil{
+                // self.viewEditProfileImage.isHidden = true
+            }else{
+                // self.viewEditProfileImage.isHidden = false
+            }
+            imagePicker.dismiss(animated: true, completion: nil)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            self.pickedImage = originalImage
+            self.imgVwUser.image = pickedImage
+            self.makeRounded()
+            // self.cornerImage(image: self.imgUpload,color:#colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1) ,width: 0.5 )
+            if self.imgVwUser.image == nil{
+                // self.viewEditProfileImage.isHidden = true
+            }else{
+                //self.viewEditProfileImage.isHidden = false
+            }
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func cornerImage(image: UIImageView, color: UIColor ,width: CGFloat){
+        image.layer.cornerRadius = image.layer.frame.size.height / 2
+        image.layer.masksToBounds = false
+        image.layer.borderColor = color.cgColor
+        image.layer.borderWidth = width
+        
+    }
+    
+    func makeRounded() {
+        
+        self.imgVwUser.layer.borderWidth = 0
+        self.imgVwUser.layer.masksToBounds = false
+        //self.imgUpload.layer.borderColor = UIColor.blackColor().CGColor
+        self.imgVwUser.layer.cornerRadius = self.imgVwUser.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
+        self.imgVwUser.clipsToBounds = true
+    }
+    
+}
+
+extension ProfileViewController{
+    
+    func call_WsGetProfile(){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+       // objWebServiceManager.showIndicator()
+        
+        let dict = ["user_id":"3"]as [String:Any]
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getProfile, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            if status == MessageConstant.k_StatusCode{
+                if let user_data  = response["result"] as? [String:Any]{
+                    
+                    if let name = user_data["name"]as? String{
+                        self.tfUserName.text = name
+                    }
+                    
+                    if let email = user_data["email"]as? String{
+                        self.tfEmail.text = email
+                    }
+                    
+                    if let phone = user_data["mobile"]as? String{
+                        self.tfPhone.text = phone
+                    }
+                    
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
     }
     
 }

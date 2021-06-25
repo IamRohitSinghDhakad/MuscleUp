@@ -52,6 +52,13 @@
 		F914CC42267F81EF0038C110 /* MealsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC41267F81EF0038C110 /* MealsTableViewCell.swift */; };
 		F927AAF2267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F927AAF1267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift */; };
 		F9C5047E267FB713005C179C /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C5047D267FB713005C179C /* PrivacyPolicyViewController.swift */; };
+		F9E53D7C2684CB4A000C61D5 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D7A2684CB4A000C61D5 /* WebServiceManager.swift */; };
+		F9E53D7D2684CB4A000C61D5 /* WebServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D7B2684CB4A000C61D5 /* WebServiceHelper.swift */; };
+		F9E53D822684D573000C61D5 /* UserDefaultExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D802684D573000C61D5 /* UserDefaultExtension.swift */; };
+		F9E53D832684D573000C61D5 /* AppSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D812684D573000C61D5 /* AppSharedData.swift */; };
+		F9E53D862684D621000C61D5 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D852684D621000C61D5 /* SignUpModel.swift */; };
+		F9E53D882684FAD5000C61D5 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D872684FAD5000C61D5 /* BannerModel.swift */; };
+		F9E53D8A2684FFBF000C61D5 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53D892684FFBF000C61D5 /* CategoryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +115,13 @@
 		F914CC41267F81EF0038C110 /* MealsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsTableViewCell.swift; sourceTree = "<group>"; };
 		F927AAF1267F2C2C00FEF6F4 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9C5047D267FB713005C179C /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		F9E53D7A2684CB4A000C61D5 /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
+		F9E53D7B2684CB4A000C61D5 /* WebServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceHelper.swift; sourceTree = "<group>"; };
+		F9E53D802684D573000C61D5 /* UserDefaultExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultExtension.swift; sourceTree = "<group>"; };
+		F9E53D812684D573000C61D5 /* AppSharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSharedData.swift; sourceTree = "<group>"; };
+		F9E53D852684D621000C61D5 /* SignUpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		F9E53D872684FAD5000C61D5 /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
+		F9E53D892684FFBF000C61D5 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +174,9 @@
 		F9059597267CFED6008864AA /* MuscleUp */ = {
 			isa = PBXGroup;
 			children = (
+				F9E53D842684D612000C61D5 /* ModelClasses */,
+				F9E53D7E2684D560000C61D5 /* SharedFiles */,
+				F9E53D782684CB3A000C61D5 /* Resorce */,
 				F90595F1267D27B0008864AA /* BridgingHeaderFile */,
 				F90595B1267D1671008864AA /* Extensions */,
 				F90595AD267D0D3D008864AA /* Interface */,
@@ -421,6 +438,50 @@
 			path = TermsService;
 			sourceTree = "<group>";
 		};
+		F9E53D782684CB3A000C61D5 /* Resorce */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53D792684CB4A000C61D5 /* WebServiceManager */,
+			);
+			path = Resorce;
+			sourceTree = "<group>";
+		};
+		F9E53D792684CB4A000C61D5 /* WebServiceManager */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53D7A2684CB4A000C61D5 /* WebServiceManager.swift */,
+				F9E53D7B2684CB4A000C61D5 /* WebServiceHelper.swift */,
+			);
+			path = WebServiceManager;
+			sourceTree = "<group>";
+		};
+		F9E53D7E2684D560000C61D5 /* SharedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53D7F2684D573000C61D5 /* AppSharedClass */,
+			);
+			path = SharedFiles;
+			sourceTree = "<group>";
+		};
+		F9E53D7F2684D573000C61D5 /* AppSharedClass */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53D802684D573000C61D5 /* UserDefaultExtension.swift */,
+				F9E53D812684D573000C61D5 /* AppSharedData.swift */,
+			);
+			path = AppSharedClass;
+			sourceTree = "<group>";
+		};
+		F9E53D842684D612000C61D5 /* ModelClasses */ = {
+			isa = PBXGroup;
+			children = (
+				F9E53D852684D621000C61D5 /* SignUpModel.swift */,
+				F9E53D872684FAD5000C61D5 /* BannerModel.swift */,
+				F9E53D892684FFBF000C61D5 /* CategoryModel.swift */,
+			);
+			path = ModelClasses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -543,13 +604,17 @@
 				F914CC32267F6CFC0038C110 /* SettingViewController.swift in Sources */,
 				F914CC3C267F79FE0038C110 /* SubscriptionListTableViewCell.swift in Sources */,
 				F90595BA267D1671008864AA /* MessageConstant.swift in Sources */,
+				F9E53D7C2684CB4A000C61D5 /* WebServiceManager.swift in Sources */,
 				F914CC2E267F6CD90038C110 /* ProfileViewController.swift in Sources */,
+				F9E53D822684D573000C61D5 /* UserDefaultExtension.swift in Sources */,
 				F905959D267CFED6008864AA /* ViewController.swift in Sources */,
 				F90595E4267D22D5008864AA /* RevealViewController.swift in Sources */,
+				F9E53D8A2684FFBF000C61D5 /* CategoryModel.swift in Sources */,
 				F914CC37267F6D3A0038C110 /* MealsDetailViewController.swift in Sources */,
 				F90595E3267D22D5008864AA /* BasicTransitionAnimator.swift in Sources */,
 				F90595E2267D22D5008864AA /* SideMenuController.swift in Sources */,
 				F90595BC267D1671008864AA /* Extensions.swift in Sources */,
+				F9E53D882684FAD5000C61D5 /* BannerModel.swift in Sources */,
 				F9059599267CFED6008864AA /* AppDelegate.swift in Sources */,
 				F90595E0267D22D5008864AA /* Segue.swift in Sources */,
 				F90595E6267D22D5008864AA /* SWRevealViewController.m in Sources */,
@@ -558,9 +623,11 @@
 				F90595ED267D230D008864AA /* AppSideMenuTableViewCell.swift in Sources */,
 				F914CC3F267F7AB40038C110 /* SettingTableViewCell.swift in Sources */,
 				F90595DD267D22D5008864AA /* Delegate.swift in Sources */,
+				F9E53D862684D621000C61D5 /* SignUpModel.swift in Sources */,
 				F914CC3A267F79E30038C110 /* SubscriptionCollectionViewCell.swift in Sources */,
 				F914CC42267F81EF0038C110 /* MealsTableViewCell.swift in Sources */,
 				F90595B9267D1671008864AA /* AlertViewController.swift in Sources */,
+				F9E53D7D2684CB4A000C61D5 /* WebServiceHelper.swift in Sources */,
 				F914CC29267F6B690038C110 /* CategoryDetailViewController.swift in Sources */,
 				F90595C0267D1E31008864AA /* VerificationCodeViewController.swift in Sources */,
 				F90595DF267D22D5008864AA /* UIViewController+Container.swift in Sources */,
@@ -568,6 +635,7 @@
 				F90595DC267D22D5008864AA /* Preferences.swift in Sources */,
 				F90595E5267D22D5008864AA /* SWRevealViewController+Extensions.swift in Sources */,
 				F905959B267CFED6008864AA /* SceneDelegate.swift in Sources */,
+				F9E53D832684D573000C61D5 /* AppSharedData.swift in Sources */,
 				F914CC30267F6CEA0038C110 /* SubscriptionViewController.swift in Sources */,
 				F9C5047E267FB713005C179C /* PrivacyPolicyViewController.swift in Sources */,
 				F90595BD267D1671008864AA /* CustomUIView.swift in Sources */,

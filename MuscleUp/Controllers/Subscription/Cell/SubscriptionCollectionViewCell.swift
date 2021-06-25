@@ -22,6 +22,7 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
         self.tblSubscriptionList.dataSource = self
         
         DispatchQueue.main.async {
+            self.setBgColorInCell()
             // corner radius
             self.vwContainer.layer.cornerRadius = 15
             // shadow
@@ -30,6 +31,20 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
             self.vwContainer.layer.shadowOpacity = 0.9
             self.vwContainer.layer.shadowRadius = 5.0
         }
+        
+    }
+    
+    func setBgColorInCell(){
+        if let value = UserDefaults.standard.value(forKey: UserDefaults.Keys.strGender)as? String{
+            if value == "Male"{
+                self.vwBg.backgroundColor = UIColor.init(named: "AppBlue")
+            }else{
+                self.vwBg.backgroundColor = UIColor.init(named: "AppPink")
+            }
+        }else{
+            self.vwBg.backgroundColor = UIColor.init(named: "AppBlue")
+        }
+        
     }
 }
 

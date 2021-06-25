@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
@@ -15,8 +16,9 @@ class HomeViewController: UIViewController {
     @IBOutlet var hgtConsCvCategories: NSLayoutConstraint!
     @IBOutlet var cvTrainer: UICollectionView!
     
-    var arrCategory = ["Chest","Shoulder","Legs","Biceps","Abs","Triceps"]
-    var arrImages = [UIImage.init(named: "one_home"),UIImage.init(named: "two_home"),UIImage.init(named: "three_home"),UIImage.init(named: "four_home"),UIImage.init(named: "five_home"),UIImage.init(named: "six_home")]
+    var arrBannerData = [BannerModel]()
+    var arrCategory = [CategoryModel]()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,9 @@ class HomeViewController: UIViewController {
         self.cvTrainer.delegate = self
         self.cvTrainer.dataSource = self
         // Do any additional setup after loading the view.
+        
+        self.call_WsGetBanner()
+        self.call_WsGetCategory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,9 +60,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.cvTrainer{
-            return 3
+            return self.arrBannerData.count
         }else{
-            return self.arrCategory.count//self.arrCategory.count
+            return self.arrCategory.count
         }
        
     }
@@ -67,6 +72,15 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         if collectionView == self.cvTrainer{
             let cellTrainer = collectionView.dequeueReusableCell(withReuseIdentifier: "TrainerCollectionViewCell", for: indexPath)as! TrainerCollectionViewCell
                 
+            let obj = self.arrBannerData[indexPath.row]
+            let profilePic = obj.strBanner_image
+            if profilePic != "" {
+                let url = URL(string: profilePic)
+                cellTrainer.imgvw.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
+            }
+            cellTrainer.lblTitle.text = ""
+            cellTrainer.txtVwDesription.text = obj.strBanner_name
+            
                 
                 return cellTrainer
         }else{
@@ -74,16 +88,13 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
             
             let objCategory = self.arrCategory[indexPath.row]
             
-            cell.lblCategory.text = objCategory
+            cell.lblCategory.text = objCategory.strCategory_name
             
-            cell.imgVw.image = self.arrImages[indexPath.row]
-            //
-            //            let profilePic = objCategory.strCategoryImage
-            //
-            //            if profilePic != "" {
-            //                let url = URL(string: profilePic)
-            //                cell.imgvwCategory.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
-            //            }
+            let profilePic = objCategory.strCategory_image
+            if profilePic != "" {
+                let url = URL(string: profilePic)
+                cell.imgVw.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
+            }
             
             
             return cell
@@ -95,7 +106,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         if collectionView == cvCategories{
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "CategoryDetailViewController")as! CategoryDetailViewController
-            vc.strTitle = self.arrCategory[indexPath.row]
+            vc.obj = self.arrCategory[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -134,4 +145,99 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
     }
+}
+
+//MARK:- Call Webservice Get Banner
+
+extension HomeViewController{
+    
+    func call_WsGetBanner(){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getBanner, params: [:], queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            if status == MessageConstant.k_StatusCode{
+                if let banner_data  = response["result"] as? [[String:Any]] {
+                    if banner_data.count != 0{
+                        for data in banner_data{
+                            let obj = BannerModel.init(dict: data)
+                            self.arrBannerData.append(obj)
+                        }
+                        self.cvTrainer.reloadData()
+                    }
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
+    func call_WsGetCategory(){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+       // objWebServiceManager.showIndicator()
+        
+        let dict = ["sex":"Male"]as [String:Any]
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getCategory, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            if status == MessageConstant.k_StatusCode{
+                if let category_data  = response["result"] as? [[String:Any]] {
+                    if category_data.count != 0{
+                        
+                        for data in category_data{
+                            let obj = CategoryModel.init(dict: data)
+                            self.arrCategory.append(obj)
+                        }
+                        self.cvCategories.reloadData()
+                    }
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
 }

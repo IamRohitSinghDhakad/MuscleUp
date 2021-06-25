@@ -31,3 +31,5 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
 }
+
+
