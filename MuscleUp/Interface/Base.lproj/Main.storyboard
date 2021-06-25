@@ -41,7 +41,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5Zi-9n-nlF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0gz-SJ-SDj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNav" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0gz-SJ-SDj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yNN-k6-6RH">
                         <autoresizingMask key="autoresizingMask"/>
@@ -3290,7 +3290,7 @@
         <image name="camera" width="20" height="16"/>
         <image name="circle" width="15.5" height="15.5"/>
         <image name="edit" width="15.5" height="15.5"/>
-        <image name="img" width="352.5" height="198.5"/>
+        <image name="img" width="360" height="240.5"/>
         <image name="img_chest" width="360" height="240.5"/>
         <image name="img_login" width="375" height="240"/>
         <image name="logo" width="202" height="168.5"/>

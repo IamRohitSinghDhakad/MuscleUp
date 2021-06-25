@@ -82,6 +82,17 @@ class LoginSignupViewController: UIViewController {
         self.vwSignUpBg.backgroundColor = MessageConstant.colorGreyBG
         self.vwLoginBg.backgroundColor = UIColor.white
     }
+    
+    func clearAllValues(){
+        self.tfEmail.text = ""
+        self.tfFullName.text = ""
+        self.tfMobileNumber.text = ""
+        self.tfPassword.text = ""
+        self.strGender = "Male"
+        self.imgVwMale.image = #imageLiteral(resourceName: "select")
+        self.imgVwFemale.image = #imageLiteral(resourceName: "circle")
+        self.imgVwprivacyPolicyCheck.image = #imageLiteral(resourceName: "box")
+    }
 
     @IBAction func actionBtnLogin(_ sender: Any) {
         isSignup = false
@@ -227,6 +238,10 @@ extension LoginSignupViewController{
                 objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
                 objAppShareData.fetchUserInfoFromAppshareData()
                 
+                if let gender = user_details?["sex"]as? String{
+                    UserDefaults.standard.setValue(gender, forKey: UserDefaults.Keys.strGender)
+                }
+                
                 ObjAppdelegate.HomeNavigation()
 
             }else{
@@ -297,6 +312,9 @@ extension LoginSignupViewController{
 
                 objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
                 objAppShareData.fetchUserInfoFromAppshareData()
+                
+                self.clearAllValues()
+                self.setUpForLogin()
 
             }else{
                 objWebServiceManager.hideIndicator()

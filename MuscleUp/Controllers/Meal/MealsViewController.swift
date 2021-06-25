@@ -12,9 +12,7 @@ class MealsViewController: UIViewController {
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var tblMealPlan: UITableView!
     
-     
-    
-    var arrMeals = ["BreakFast Meal","Snack Meal", "Lunch Meal", "Dinner Meal"]
+    var arrMeals = [MealModel]()
     var arrMealsImage = [UIImage.init(named: "one_meal"), UIImage.init(named: "two_meal"), UIImage.init(named: "three_meal"),UIImage.init(named: "four_meal")]
     
     override func viewDidLoad() {
@@ -28,12 +26,8 @@ class MealsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.view.setBgColor()
     }
-    
-    
-    
     
     @IBAction func btnBackOnHeader(_ sender: Any) {
         self.onBackPressed()
@@ -50,8 +44,16 @@ extension MealsViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MealsTableViewCell")as! MealsTableViewCell
         
-        cell.lblMeals.text = self.arrMeals[indexPath.row]
-        cell.imgVwMeal.image = self.arrMealsImage[indexPath.row]
+        let obj = self.arrMeals[indexPath.row]
+        
+        cell.lblMeals.text = obj.strMeal_plan_name
+        
+        let profilePic = obj.strMeal_plan_image
+        if profilePic != "" {
+            let url = URL(string: profilePic)
+            cell.imgVwMeal.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "one_meal"))
+        }
+        
         
         return cell
     }
@@ -82,7 +84,7 @@ extension MealsViewController{
         
         let dict = ["sex":"Male"]as [String:Any]
         
-        objWebServiceManager.requestGet(strURL: WsUrl.url_getMeals, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getMealsPlan, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
             
             let status = (response["status"] as? Int)
@@ -92,12 +94,12 @@ extension MealsViewController{
                 if let category_data  = response["result"] as? [[String:Any]] {
                     if category_data.count != 0{
                         
-//                        for data in category_data{
-//                            let obj = CategoryModel.init(dict: data)
-//                            self.arrCategory.append(obj)
-//                        }
-//                        
-//                        self.cvCategories.reloadData()
+                        for data in category_data{
+                            let obj = MealModel.init(dict: data)
+                            self.arrMeals.append(obj)
+                        }
+                        
+                        self.tblMealPlan.reloadData()
                     }
                 }
                 else {

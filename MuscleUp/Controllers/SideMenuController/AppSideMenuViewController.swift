@@ -94,9 +94,9 @@ class AppSideMenuViewController: UIViewController {
             self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController")
         }, with: "3")
         
-        sideMenuController?.cache(viewControllerGenerator: {
-            self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
-        }, with: "4")
+//        sideMenuController?.cache(viewControllerGenerator: {
+//            self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")
+//        }, with: "4")
         
     }
     
@@ -160,12 +160,6 @@ extension AppSideMenuViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AppSideMenuTableViewCell", for: indexPath) as! AppSideMenuTableViewCell
         let row = indexPath.row
-//        if self.selectedIndexpath == indexPath.row{
-//            cell.menuImage.image = UIImage(named: menus[row].menuSelectedImageName)
-//        }else{
-//            cell.menuImage.image = UIImage(named: menus[row].menuImageName)
-//        }
-                
         
         cell.menuName.text = menus[row].menuName
         return cell
@@ -176,12 +170,12 @@ extension AppSideMenuViewController: UITableViewDelegate, UITableViewDataSource 
         
         self.selectedIndexpath = row
         
-        if row == 6 {
+        if row == 4 {
             sideMenuController?.hideMenu()
             
-//            objAlert.showAlertCallBack(alertLeftBtn: "No", alertRightBtn: "si", title: "Cerrar Sesión", message: "¿Quieres cerrar sesión??", controller: self) {
-//                self.call_WSLogout(strUserID: objAppShareData.UserDetail.strUserId)
-//            }
+            objAlert.showAlertCallBack(alertLeftBtn: "No", alertRightBtn: "Yes", title: "Logout?", message: "Are you sure you want to logout?", controller: self) {
+                AppSharedData.sharedObject().signOut()
+            }
             
         }
         else {

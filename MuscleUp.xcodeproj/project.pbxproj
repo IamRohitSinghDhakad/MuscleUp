@@ -39,6 +39,7 @@
 		F90595EC267D230D008864AA /* AppSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90595E9267D230D008864AA /* AppSideMenuViewController.swift */; };
 		F90595ED267D230D008864AA /* AppSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90595EB267D230D008864AA /* AppSideMenuTableViewCell.swift */; };
 		F90595F0267D2602008864AA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90595EF267D2602008864AA /* HomeViewController.swift */; };
+		F9084F152686762D00BE4D8C /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9084F142686762D00BE4D8C /* MealModel.swift */; };
 		F914CC26267F64E10038C110 /* TrainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC25267F64E10038C110 /* TrainerCollectionViewCell.swift */; };
 		F914CC29267F6B690038C110 /* CategoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC28267F6B690038C110 /* CategoryDetailViewController.swift */; };
 		F914CC2E267F6CD90038C110 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F914CC2D267F6CD90038C110 /* ProfileViewController.swift */; };
@@ -102,6 +103,7 @@
 		F90595EB267D230D008864AA /* AppSideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		F90595EF267D2602008864AA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F90595F2267D27D6008864AA /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		F9084F142686762D00BE4D8C /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
 		F914CC25267F64E10038C110 /* TrainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		F914CC28267F6B690038C110 /* CategoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewController.swift; sourceTree = "<group>"; };
 		F914CC2D267F6CD90038C110 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				F9E53D852684D621000C61D5 /* SignUpModel.swift */,
 				F9E53D872684FAD5000C61D5 /* BannerModel.swift */,
 				F9E53D892684FFBF000C61D5 /* CategoryModel.swift */,
+				F9084F142686762D00BE4D8C /* MealModel.swift */,
 			);
 			path = ModelClasses;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				F905959D267CFED6008864AA /* ViewController.swift in Sources */,
 				F90595E4267D22D5008864AA /* RevealViewController.swift in Sources */,
 				F9E53D8A2684FFBF000C61D5 /* CategoryModel.swift in Sources */,
+				F9084F152686762D00BE4D8C /* MealModel.swift in Sources */,
 				F914CC37267F6D3A0038C110 /* MealsDetailViewController.swift in Sources */,
 				F90595E3267D22D5008864AA /* BasicTransitionAnimator.swift in Sources */,
 				F90595E2267D22D5008864AA /* SideMenuController.swift in Sources */,
