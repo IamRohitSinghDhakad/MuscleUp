@@ -30,11 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        if AppSharedData.sharedObject().isLoggedIn {
-            self.HomeNavigation()
-        }else{
-            self.LoginNavigation()
-        }
+        self.settingRootController()
         
         return true
     }
@@ -53,14 +49,21 @@ extension AppDelegate {
     
     func HomeNavigation() {
         let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "SideMenuController")
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "Reveal")
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }
     
+//    func HomeNavigation() {
+//        let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let navigationController = storyboard.instantiateViewController(withIdentifier: "SideMenuController")
+//        self.window?.rootViewController = navigationController
+//        self.window?.makeKeyAndVisible()
+//    }
+    
     func settingRootController() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let vc = UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
         //        let navController = UINavigationController(rootViewController: setViewController)
         appDelegate.window?.rootViewController = vc
     }

@@ -7,48 +7,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "434B8AD6-BF72-404B-8A4F-A5569906367A"
+            uuid = "BC81FBA4-3DB2-4061-92F4-8116B253E4D8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MuscleUp/Controllers/Meal/MealsViewController.swift"
+            filePath = "MuscleUp/Controllers/Meal/MealsDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "call_WsGetMeals()"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "call_WsGetMealsDescription(strPlanID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1AFF3B08-C062-4E08-B48B-0214A9CFC5BC"
+            uuid = "A5F57BA8-37E2-41D0-B17F-784AE2CF0A74"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MuscleUp/Controllers/Authentication/LoginSignupViewController.swift"
+            filePath = "MuscleUp/Controllers/Meal/MealsDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "call_WsLogin()"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "setData(strObj:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5C66E1D0-E4C0-4002-B119-D08D59487B53"
+            uuid = "E7A5EB9D-FA68-44A8-880C-7D2A121F4D3A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MuscleUp/Controllers/Authentication/LoginSignupViewController.swift"
+            filePath = "MuscleUp/Controllers/TermsService/PrivacyPolicyViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "call_WsLogin()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9EA66D36-0435-44E4-A5D8-FCD146340113"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MuscleUp/Controllers/TermsService/PrivacyPolicyViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "419094EE-E576-429B-8ECE-52335E73A537"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MuscleUp/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "94F1057E-CB6A-4CE7-BC26-D848DAD356FB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MuscleUp/Resorce/WebServiceManager/WebServiceManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
+            landmarkName = "uploadMultipartWithImagesData(strURL:params:showIndicator:customValidation:imageData:imageToUpload:imagesParam:fileName:mimeType:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A17FA394-5249-4F3C-850D-4A379C58B0C6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MuscleUp/Resorce/WebServiceManager/WebServiceManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "uploadMultipartWithImagesData(strURL:params:showIndicator:customValidation:imageData:imageToUpload:imagesParam:fileName:mimeType:success:failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD24FD7C-31F8-40AC-9D6F-A19A82242093"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MuscleUp/Resorce/WebServiceManager/WebServiceManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
+            landmarkName = "uploadMultipartWithImagesData(strURL:params:showIndicator:customValidation:imageData:imageToUpload:imagesParam:fileName:mimeType:success:failure:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController,UINavigationControllerDelegate {
     }
     
     @IBAction func btnOnSave(_ sender: Any) {
-        
+        self.callWebserviceForUpdateProfile()
     }
 }
 
@@ -199,7 +199,7 @@ extension ProfileViewController{
         
        // objWebServiceManager.showIndicator()
         
-        let dict = ["user_id":"3"]as [String:Any]
+        let dict = ["user_id":objAppShareData.UserDetail.strUserId]as [String:Any]
         
         objWebServiceManager.requestGet(strURL: WsUrl.url_getProfile, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
@@ -222,6 +222,14 @@ extension ProfileViewController{
                         self.tfPhone.text = phone
                     }
                     
+                    if let user_image = user_data["user_image"]as? String{
+                        let profilePic = user_image
+                        if profilePic != "" {
+                            let url = URL(string: profilePic)
+                            self.imgVwUser.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "male"))
+                        }
+                    }
+                    
                 }
                 else {
                     objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
@@ -241,3 +249,69 @@ extension ProfileViewController{
     }
     
 }
+
+
+//MARK:- CallWebservice
+extension ProfileViewController{
+    
+    func callWebserviceForUpdateProfile(){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        objWebServiceManager.showIndicator()
+        self.view.endEditing(true)
+        
+        var imageData = [Data]()
+        var imgData : Data?
+        if self.pickedImage != nil{
+            imgData = (self.pickedImage?.jpegData(compressionQuality: 1.0))!
+        }
+        else {
+            imgData = (self.imgVwUser.image?.jpegData(compressionQuality: 1.0))!
+        }
+        imageData.append(imgData!)
+        
+        let imageParam = ["user_image"]
+        
+        print(imageData)
+        
+        let dicrParam = ["name":self.tfUserName.text!,
+                         "user_id":objAppShareData.UserDetail.strUserId,
+                         "mobile":self.tfPhone.text!]as [String:Any]
+        
+        print(dicrParam)
+        
+        objWebServiceManager.uploadMultipartWithImagesData(strURL: WsUrl.url_updateProfile, params: dicrParam, showIndicator: true, customValidation: "", imageData: imgData, imageToUpload: imageData, imagesParam: imageParam, fileName: "user_image", mimeType: "image/jpeg") { (response) in
+            objWebServiceManager.hideIndicator()
+            print(response)
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
+            if status == MessageConstant.k_StatusCode{
+            
+                let user_details  = response["result"] as? [String:Any]
+
+                objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
+                objAppShareData.fetchUserInfoFromAppshareData()
+                
+                self.call_WsGetProfile()
+                
+              
+
+            }else{
+                objWebServiceManager.hideIndicator()
+                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+            }
+        } failure: { (Error) in
+            print(Error)
+        }
+    }
+    
+    
+
+    
+   }

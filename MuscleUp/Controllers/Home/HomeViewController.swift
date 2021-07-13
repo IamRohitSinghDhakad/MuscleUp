@@ -174,6 +174,9 @@ extension HomeViewController{
                             let obj = BannerModel.init(dict: data)
                             self.arrBannerData.append(obj)
                         }
+                        
+                        self.cvTrainer.displayBackgroundText(text: "")
+                        
                         self.cvTrainer.reloadData()
                     }
                 }
@@ -182,8 +185,8 @@ extension HomeViewController{
                 }
             }else{
                 objWebServiceManager.hideIndicator()
-                if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                if (response["result"]as? String) != nil{
+                    self.cvTrainer.displayBackgroundText(text: "No Trainer Instrction Found")
                 }else{
                     objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
                 }
@@ -202,9 +205,8 @@ extension HomeViewController{
             return
         }
         
-       // objWebServiceManager.showIndicator()
         
-        let dict = ["sex":"Male"]as [String:Any]
+        let dict = ["sex":objAppShareData.UserDetail.strGender]as [String:Any]
         
         objWebServiceManager.requestGet(strURL: WsUrl.url_getCategory, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
@@ -220,6 +222,7 @@ extension HomeViewController{
                             let obj = CategoryModel.init(dict: data)
                             self.arrCategory.append(obj)
                         }
+                        self.cvCategories.displayBackgroundText(text: "")
                         self.cvCategories.reloadData()
                     }
                 }
@@ -228,8 +231,9 @@ extension HomeViewController{
                 }
             }else{
                 objWebServiceManager.hideIndicator()
-                if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                if (response["result"]as? String) != nil{
+                    self.cvCategories.displayBackgroundText(text: "No Category Found")
+                   // objAlert.showAlert(message: msgg, title: "", controller: self)
                 }else{
                     objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
                 }

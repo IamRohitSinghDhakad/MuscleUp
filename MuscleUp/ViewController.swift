@@ -13,9 +13,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.pushVc(viewConterlerId: "LoginSignupViewController")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if AppSharedData.sharedObject().isLoggedIn {
+                let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
+                let navController = UINavigationController(rootViewController: vc)
+                navController.isNavigationBarHidden = true
+                appDelegate.window?.rootViewController = navController
+            }else{
+                let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "LoginSignupViewController") as? LoginSignupViewController)!
+                let navController = UINavigationController(rootViewController: vc)
+                navController.isNavigationBarHidden = true
+                appDelegate.window?.rootViewController = navController
+            }
         }
        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 

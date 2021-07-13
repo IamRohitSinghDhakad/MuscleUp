@@ -18,12 +18,15 @@ struct WsUrl{
     static let url_Login  = BASE_URL + "login"
     static let url_getProfile = BASE_URL + "get_profile?"
     static let url_getMealsPlan = BASE_URL + "get_meal_plan"
+    static let url_getMealsPlanID = BASE_URL + "get_meals?"
     static let url_getCity = BASE_URL + "get_city?"
     static let url_completeProfile = BASE_URL + "complete_profile"
     static let url_forgotPassword = BASE_URL + "forgot_password"
-    static let url_GetUserList = BASE_URL + "get_users"
+    static let url_updateProfile = BASE_URL + "update_profile"
     static let url_Logout = BASE_URL + "logout?"
     static let url_notificationSend = BASE_URL + "send_notification?"
+    static let url_getSubscriptionList = BASE_URL + ""
+    static let url_validatePurchase = BASE_URL + ""
 }
 
 //Api Header
@@ -50,7 +53,7 @@ struct WsParam {
 
     
 
-    //static let itunesSharedSecret : String = "c736cf14764344a5913c8c1"
+    static let itunesSharedSecret : String = "cbce81e48793457e80b00062c1a77090"
 
     //Signup
 

@@ -52,6 +52,8 @@ extension MealsViewController:UITableViewDelegate,UITableViewDataSource{
         if profilePic != "" {
             let url = URL(string: profilePic)
             cell.imgVwMeal.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "one_meal"))
+        }else{
+            cell.imgVwMeal.image = #imageLiteral(resourceName: "two_meal")
         }
         
         
@@ -60,7 +62,7 @@ extension MealsViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MealsDetailViewController")as! MealsDetailViewController
-        
+        vc.strMealId = self.arrMeals[indexPath.row].strMeal_plan_id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -80,11 +82,10 @@ extension MealsViewController{
             return
         }
         
-       // objWebServiceManager.showIndicator()
+    
+        objWebServiceManager.showIndicator()
         
-        let dict = ["sex":"Male"]as [String:Any]
-        
-        objWebServiceManager.requestGet(strURL: WsUrl.url_getMealsPlan, params: dict, queryParams: [:], strCustomValidation: "") { (response) in
+        objWebServiceManager.requestGet(strURL: WsUrl.url_getMealsPlan, params: [:], queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
             
             let status = (response["status"] as? Int)

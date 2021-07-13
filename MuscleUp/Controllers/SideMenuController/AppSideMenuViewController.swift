@@ -44,9 +44,7 @@ class AppSideMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         configureView()
-        
         // Along with auto layout, these are the keys for enabling variable cell height
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -55,6 +53,8 @@ class AppSideMenuViewController: UIViewController {
     
         sideMenuController?.delegate = self
     }
+    
+    
     
     
     func setThemeColor(){
@@ -74,7 +74,13 @@ class AppSideMenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.setThemeColor()
-
+        
+      
+        let profilePic = objAppShareData.UserDetail.strProfilePicture
+            if profilePic != "" {
+                let url = URL(string: profilePic)
+                self.imgVwUser.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo"))
+            }
     }
     
     private func controllerMenuSetup() {

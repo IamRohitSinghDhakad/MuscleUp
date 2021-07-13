@@ -51,8 +51,29 @@ extension SettingViewController:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")as! PrivacyPolicyViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+       // self.pushVc(viewConterlerId: "SubscriptionViewController")
+        
+        switch indexPath.row {
+        case 0:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")as! PrivacyPolicyViewController
+            vc.strType = self.arrOptions[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 1:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")as! PrivacyPolicyViewController
+            vc.strType = self.arrOptions[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        case 3:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")as! PrivacyPolicyViewController
+            vc.strType = self.arrOptions[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SubscriptionViewController")as! SubscriptionViewController
+            vc.isComingFrom = "Setting"
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        
     }
     
     

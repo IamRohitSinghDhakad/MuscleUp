@@ -5,12 +5,14 @@ PODS:
   - SDWebImage/MapKit (5.11.1):
     - SDWebImage/Core
   - SVProgressHUD (2.2.5)
+  - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
   - Alamofire
   - IQKeyboardManagerSwift
   - SDWebImage/MapKit
   - SVProgressHUD
+  - SwiftyStoreKit
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - SDWebImage
     - SVProgressHUD
+    - SwiftyStoreKit
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 10e53e4b8185a405f6ae064cc241b87f5e70f028
+PODFILE CHECKSUM: 83769c5934947346a9e4762ee5f2b2a3e0361584
 
 COCOAPODS: 1.10.1

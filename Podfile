@@ -10,5 +10,8 @@ target 'MuscleUp' do
   pod 'SVProgressHUD'
   pod 'SDWebImage/MapKit'
   pod 'IQKeyboardManagerSwift'
+  
+  #Pods For InAppPurchase
+  pod 'SwiftyStoreKit'
 
 end
