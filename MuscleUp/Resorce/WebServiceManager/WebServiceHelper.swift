@@ -25,8 +25,8 @@ struct WsUrl{
     static let url_updateProfile = BASE_URL + "update_profile"
     static let url_Logout = BASE_URL + "logout?"
     static let url_notificationSend = BASE_URL + "send_notification?"
-    static let url_getSubscriptionList = BASE_URL + ""
-    static let url_validatePurchase = BASE_URL + ""
+    static let url_getSubscriptionList = BASE_URL + "get_membership_plan"
+    static let url_validatePurchase = BASE_URL + "purchase_a_plan?"
 }
 
 //Api Header

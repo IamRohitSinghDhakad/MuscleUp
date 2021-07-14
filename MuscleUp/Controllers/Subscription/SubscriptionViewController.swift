@@ -33,6 +33,8 @@ class SubscriptionViewController: UIViewController {
         
         self.cvSuscription.delegate = self
         self.cvSuscription.dataSource = self
+        
+        self.callWebserviceGetPlanList()
         // Do any additional setup after loading the view.
         
 //        RDIAPHandler.shared.setProductIds(ids: ["com.ios.MuscleUp_silverPlan"])
@@ -67,12 +69,20 @@ class SubscriptionViewController: UIViewController {
 extension SubscriptionViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.arrPlanList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SubscriptionCollectionViewCell", for: indexPath)as! SubscriptionCollectionViewCell
         
+        let obj = self.arrPlanList[indexPath.row]
+        
+        cell.lblPrice.text = "$" + obj.strAmount
+        if obj.strTitle.contains("Monthly"){
+            cell.lblValidity.text = "monthly"
+        }else{
+            cell.lblValidity.text = "Yearly"
+        }
         
         cell.btnChoose.tag = indexPath.row
         cell.btnChoose.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
@@ -104,10 +114,10 @@ extension SubscriptionViewController:UICollectionViewDelegate,UICollectionViewDa
         SVProgressHUD.show(withStatus: "Please wait...")
         let objID = self.arrPlanList[sender.tag]
         self.strPlanAmount = objID.strAmount
-        self.strProductId = objID.strIosPackageIdentifier
+        self.strProductId = "com.ios.MuscleUp_MonthlySubscription"//objID.strIosPackageIdentifier
         self.strPlanTitle = objID.strTitle
         
-        PurchaseHelper.payForPackage(packageId: objID.strIosPackageIdentifier, onSuccss: {[weak self] (PurchaseDetails, encodedString , receipt_Data) in
+        PurchaseHelper.payForPackage(packageId: self.strProductId, onSuccss: {[weak self] (PurchaseDetails, encodedString , receipt_Data) in
             guard let weakSelf = self else{return}
             SVProgressHUD.dismiss()
             weakSelf.upload(receipt: receipt_Data, SubscriptionPlanId: "\(objID.strPlanID)" )//
@@ -128,8 +138,8 @@ extension SubscriptionViewController{
     func upload(receipt data: Data , SubscriptionPlanId : String) {
         
         let receiptdataBase64 = data.base64EncodedString()
-//        print(self.strProductId)
-//        print(receiptdataBase64,SubscriptionPlanId)
+        print(self.strProductId)
+        print(receiptdataBase64,SubscriptionPlanId)
         self.callWebservice_ForPurchasePlan(planId: SubscriptionPlanId, planTitle: self.strPlanTitle , planAmount: self.strPlanAmount , encodedString: receiptdataBase64, productId: self.strProductId,purchaseDetails: [:])
     }
  
@@ -150,9 +160,28 @@ extension SubscriptionViewController{
 
         objWebServiceManager.showIndicator()
         objWebServiceManager.requestGet(strURL: WsUrl.url_getSubscriptionList, params: nil, queryParams: [:], strCustomValidation: "", success: {response in
-            let status = response["status"] as? String ?? ""
-            let message = response["message"] as? String ?? ""
+            
+            print(response)
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
             self.arrPlanList.removeAll()
+            
+            if status == MessageConstant.k_StatusCode{
+                if let data = response["result"] as? [[String:Any]]{
+                    
+                        for obj in data{
+                            let objSubsc = SubscriptionPlanListModel.init(dict: obj)
+                                self.arrPlanList.append(objSubsc)
+                        }
+                    
+                    self.cvSuscription.reloadData()
+                    
+                }
+            }
+            
+            objWebServiceManager.hideIndicator()
+            
 //            if status == k_success{
 //                self.strPlanId =  UserDefaults.standard.value(forKey: UserDefaults.Keys.PlanID) as? String ?? ""
 //
@@ -204,22 +233,28 @@ extension SubscriptionViewController{
            
         self.view.endEditing(true)
         objWebServiceManager.showIndicator()
+        
+        //user_id=5&plan_id=1&txn_id=2527dsdadadf
         let param = ["plan_id":planId,
-                     "platform_type": "0",
-                     "payment_platform_type":"0" ,
-                     "platform_identifier":"com.qvazon",
-                     "transaction_detail":"",
-                     "platform_product_id":productId,
-                     "purchase_token":encodedString,
-                     "plan_title":planTitle,
-                     "plan_amount":planAmount] as [String : Any] //
+                     "user_id":objAppShareData.UserDetail.strUserId,
+                    // "platform_type": "0",
+                    // "payment_platform_type":"0" ,
+                    // "platform_identifier":"com.qvazon",
+                    // "transaction_detail":"",
+                    // "platform_product_id":productId,
+                    // "purchase_token":encodedString,
+                     "txn_id":encodedString
+                   //  "plan_title":planTitle,
+                   //  "plan_amount":planAmount
+        ] as [String : Any] //
         
            print(param)
        objWebServiceManager.requestPost(strURL: WsUrl.url_validatePurchase, queryParams: [:], params: param, strCustomValidation: "", showIndicator: false, success: {response in
             print(response)
             let status = response["status"] as? String ?? ""
             let message = response["message"] as? String ?? ""
-            
+        
+           objWebServiceManager.hideIndicator()
 //            if status == k_success {
 //               objWebServiceManager.hideIndicator()
 //

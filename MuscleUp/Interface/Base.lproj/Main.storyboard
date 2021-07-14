@@ -183,7 +183,7 @@
                                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B6q-0W-RNA">
                                                                                         <rect key="frame" x="5" y="0.0" width="305" height="60"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3328,7 +3328,7 @@
         <image name="meal" width="328" height="110"/>
         <image name="next" width="6.5" height="10.5"/>
         <image name="play" width="35.5" height="35.5"/>
-        <image name="pro" width="94.5" height="94.5"/>
+        <image name="pro" width="119" height="120"/>
         <image name="select" width="15.5" height="15.5"/>
         <image name="side_menu" width="24" height="18"/>
         <image name="two" width="330" height="159"/>

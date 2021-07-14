@@ -26,19 +26,21 @@ class SubscriptionPlanListModel: NSObject {
     var strIsSubscribe : String = ""
     
     
+ 
+    
     init(dict : [String : Any]) {
         
-        if let amount = dict["amount"]as? String{
+        if let amount = dict["price"]as? String{
             strAmount = amount
+        }else if let amount = dict["price"]as? Int{
+            strAmount = "\(amount)"
         }
-        if let androidPackageIdentifier = dict["androidPackageIdentifier"]as? String{
-            strAndroidPackageIdentifier = androidPackageIdentifier
-        }
+       
         if let currency = dict["currency"]as? String{
             strCurrency = currency
         }
         
-        if let arrDescription = dict["description"] as? [String] {
+        if let arrDescription = dict["features"] as? [String] {
             print(arrDescription.count)
             for obj in arrDescription {
                 arrplanFeature.append(obj)
@@ -47,19 +49,19 @@ class SubscriptionPlanListModel: NSObject {
 
         }
         
-        if let duration = dict["duration"]as? String{
+        if let duration = dict["validity"]as? String{
             strDuration = duration
+        }else if let duration = dict["validity"]as? Int{
+            strDuration = "\(duration)"
         }
         
-        if let duration_type = dict["duration_type"]as? String{
-            strDuration_type = duration_type
-        }
+      
         
-        if let iosPackageIdentifier = dict["iosPackageIdentifier"]as? String{
+        if let iosPackageIdentifier = dict["product_id"]as? String{
             strIosPackageIdentifier = iosPackageIdentifier
         }
         
-        if let planID = dict["planID"]as? String{
+        if let planID = dict["plan_id"]as? String{
             strPlanID = planID
         }
         
@@ -74,7 +76,7 @@ class SubscriptionPlanListModel: NSObject {
         if let stripe_product_id = dict["stripe_product_id"]as? String{
             strStripe_product_id = stripe_product_id
         }
-        if let title = dict["title"]as? String{
+        if let title = dict["plan_name"]as? String{
             strTitle = title
         }
         
