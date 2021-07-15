@@ -161,12 +161,11 @@ extension SubscriptionViewController{
         objWebServiceManager.showIndicator()
         objWebServiceManager.requestGet(strURL: WsUrl.url_getSubscriptionList, params: nil, queryParams: [:], strCustomValidation: "", success: {response in
             
-            print(response)
             let status = (response["status"] as? Int)
             let message = (response["message"] as? String)
             
             self.arrPlanList.removeAll()
-            
+            objWebServiceManager.hideIndicator()
             if status == MessageConstant.k_StatusCode{
                 if let data = response["result"] as? [[String:Any]]{
                     
@@ -178,9 +177,12 @@ extension SubscriptionViewController{
                     self.cvSuscription.reloadData()
                     
                 }
+            }else{
+                objWebServiceManager.hideIndicator()
+                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
             }
             
-            objWebServiceManager.hideIndicator()
+           
             
 //            if status == k_success{
 //                self.strPlanId =  UserDefaults.standard.value(forKey: UserDefaults.Keys.PlanID) as? String ?? ""
@@ -220,7 +222,7 @@ extension SubscriptionViewController{
           
         }, failure: { (error) in
             print(error)
-              objWebServiceManager.hideIndicator()
+            objWebServiceManager.hideIndicator()
             objAlert.showAlert(message: "Message", title: "Alert", controller: self)
         })
     }
@@ -251,34 +253,22 @@ extension SubscriptionViewController{
            print(param)
        objWebServiceManager.requestPost(strURL: WsUrl.url_validatePurchase, queryParams: [:], params: param, strCustomValidation: "", showIndicator: false, success: {response in
             print(response)
-            let status = response["status"] as? String ?? ""
-            let message = response["message"] as? String ?? ""
+        let status = (response["status"] as? Int)
+        let message = (response["message"] as? String)
         
            objWebServiceManager.hideIndicator()
-//            if status == k_success {
-//               objWebServiceManager.hideIndicator()
-//
-//               UserDefaults.standard.setValue(planId, forKey: UserDefaults.Keys.PlanID)
-//
-//               self.strPlanId =  UserDefaults.standard.value(forKey: UserDefaults.Keys.PlanID) as? String ?? ""
-//
-//
-////               if self.isfromSideMenu == true{
-////
-////                    self.cvSubscription.reloadData()
-////
-////               }else{
-////                  ObjAppdelegate.sellerHomeNavigation()
-////               }
-//
-//
-//            }
-//            else{
-//                objWebServiceManager.hideIndicator()
-//
-//               objAppShareData.showAlert(title: kAlertTitle.localize, message: message , view: self)
-//
-//            }
+        
+        if status == MessageConstant.k_StatusCode {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
+            let navController = UINavigationController(rootViewController: vc)
+            navController.isNavigationBarHidden = true
+            appDelegate.window?.rootViewController = navController
+        }else{
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+        }
+        
         }, failure: { (error) in
             print(error)
             objWebServiceManager.hideIndicator()

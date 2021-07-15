@@ -67,7 +67,7 @@ class userDetailModel: NSObject {
     var valBlockedStatus: Int = 0
     var strBlockedBy: String = ""
     var strVisibilityStatus: String = ""
-    var strMembershipStats:String = ""
+    var strMembershipStatus:String = ""
     
     init(dict : [String:Any]) {
         
@@ -87,11 +87,19 @@ class userDetailModel: NSObject {
             self.strUserName = username
         }
         
-        if let strMembership = dict["has_membership"] as? String{
-            self.strMembershipStats = strMembership
-        }else if let strMembership = dict["has_membership"] as? Int{
-            self.strMembershipStats = "\(strMembership)"
+//        if let strMembership = dict["has_membership"] as? String{
+//            self.strMembershipStatus = strMembership
+//        }else if let strMembership = dict["has_membership"] as? Int{
+//            self.strMembershipStatus = "\(strMembership)"
+//        }
+        
+        if let strMembership = dict["has_active_plan"] as? String{
+            self.strMembershipStatus = strMembership
+        }else if let strMembership = dict["has_active_plan"] as? Int{
+            self.strMembershipStatus = "\(strMembership)"
         }
+        
+        
         
         
         
