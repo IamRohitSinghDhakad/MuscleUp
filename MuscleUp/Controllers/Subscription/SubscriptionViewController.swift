@@ -250,9 +250,8 @@ extension SubscriptionViewController{
                    //  "plan_amount":planAmount
         ] as [String : Any] //
         
-           print(param)
        objWebServiceManager.requestPost(strURL: WsUrl.url_validatePurchase, queryParams: [:], params: param, strCustomValidation: "", showIndicator: false, success: {response in
-            print(response)
+            
         let status = (response["status"] as? Int)
         let message = (response["message"] as? String)
         

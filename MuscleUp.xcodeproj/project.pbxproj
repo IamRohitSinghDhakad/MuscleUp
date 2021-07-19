@@ -921,7 +921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.MuscleUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/paras/MuscleUp/MuscleUp/BridgingHeaderFile/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/rohit/Rohit's WorkSpace/Freelance/MuscleUp_iOS/MuscleUp/BridgingHeaderFile/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -945,7 +945,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.MuscleUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/paras/MuscleUp/MuscleUp/BridgingHeaderFile/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/rohit/Rohit's WorkSpace/Freelance/MuscleUp_iOS/MuscleUp/BridgingHeaderFile/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -41,6 +41,8 @@ class LoginSignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        UserDefaults.standard.setValue("Male", forKey: UserDefaults.Keys.strGender)
+        self.strGender = "Male"
         // Do any additional setup after loading the view.
         self.setUpForLogin()
     }
@@ -312,13 +314,17 @@ extension LoginSignupViewController{
             
             if status == MessageConstant.k_StatusCode{
             
+                self.view.endEditing(true)
+                self.isSignup = false
                 let user_details  = response["result"] as? [String:Any]
 
                 objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
                 objAppShareData.fetchUserInfoFromAppshareData()
                 
-                self.clearAllValues()
-                self.setUpForLogin()
+                objAlert.showAlertCallBack(alertLeftBtn: "", alertRightBtn: "OK", title: "Success", message: "Your registration complete.", controller: self) {
+                    self.clearAllValues()
+                    self.setUpForLogin()
+                }
 
             }else{
                 objWebServiceManager.hideIndicator()
