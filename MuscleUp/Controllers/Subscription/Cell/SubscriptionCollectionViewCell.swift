@@ -15,6 +15,7 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet var lblValidity: UILabel!
     @IBOutlet var vwBg: UIView!
     @IBOutlet var btnChoose: UIButton!
+    @IBOutlet weak var lblPlanFeature: UILabel!
     
     override func awakeFromNib() {
         

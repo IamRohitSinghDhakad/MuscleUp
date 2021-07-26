@@ -40,6 +40,7 @@ class LoginSignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
 
         UserDefaults.standard.setValue("Male", forKey: UserDefaults.Keys.strGender)
         self.strGender = "Male"
@@ -71,6 +72,9 @@ class LoginSignupViewController: UIViewController {
     }
     
     func setUpForSignUp(){
+        self.view.endEditing(true)
+        self.tfEmail.text = ""
+        self.tfPassword.text = ""
         
         
         self.vwFullName.isHidden = self.vwFullName.isHidden ? false : true
@@ -105,8 +109,9 @@ class LoginSignupViewController: UIViewController {
         self.setUpForSignUp()
     }
     @IBAction func btnForgotPassword(_ sender: Any) {
-        
+        self.pushVc(viewConterlerId: "ForgotPasswordViewController")
     }
+    
     @IBAction func btnMale(_ sender: Any) {
         UserDefaults.standard.setValue("Male", forKey: UserDefaults.Keys.strGender)
         self.strGender = "Male"
@@ -236,19 +241,34 @@ extension LoginSignupViewController{
             if status == MessageConstant.k_StatusCode{
             
                 let user_details  = response["result"] as? [String:Any]
-
-                objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
-                objAppShareData.fetchUserInfoFromAppshareData()
                 
-                if let gender = user_details?["sex"]as? String{
-                    UserDefaults.standard.setValue(gender, forKey: UserDefaults.Keys.strGender)
+                var isEmailVerify = ""
+                
+                if let isVerifiesd = user_details?["email_verified"]as? String{
+                    isEmailVerify = isVerifiesd
+                }else if let isVerifiesd = user_details?["email_verified"]as? Int{
+                    isEmailVerify = "\(isVerifiesd)"
                 }
                 
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
-                let navController = UINavigationController(rootViewController: vc)
-                navController.isNavigationBarHidden = true
-                appDelegate.window?.rootViewController = navController
+                if isEmailVerify == "1"{
+                    objAppShareData.SaveUpdateUserInfoFromAppshareData(userDetail: user_details ?? [:])
+                    objAppShareData.fetchUserInfoFromAppshareData()
+                    
+                    if let gender = user_details?["sex"]as? String{
+                        UserDefaults.standard.setValue(gender, forKey: UserDefaults.Keys.strGender)
+                    }
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let vc = (self.mainStoryboard.instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuController)!
+                    let navController = UINavigationController(rootViewController: vc)
+                    navController.isNavigationBarHidden = true
+                    appDelegate.window?.rootViewController = navController
+                }else{
+                    objAlert.showAlert(message: "Please verify your email first", title: "Alert", controller: self)
+                }
+                
+
+               
 
             }else{
                 objWebServiceManager.hideIndicator()

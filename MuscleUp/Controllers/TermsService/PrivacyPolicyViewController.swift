@@ -10,11 +10,8 @@ import WebKit
 
 class PrivacyPolicyViewController: UIViewController {
 
-    
     @IBOutlet var webVw: WKWebView!
     @IBOutlet var lblTitle: UILabel!
-    
-  
     
     var strType = ""
     
@@ -38,8 +35,6 @@ class PrivacyPolicyViewController: UIViewController {
         default:
             self.loadUrl(strUrl: "https://ambitious.in.net/Shubham/muscle/index.php/api/page/FAQ")
         }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

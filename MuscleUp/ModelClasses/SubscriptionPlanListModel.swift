@@ -49,6 +49,10 @@ class SubscriptionPlanListModel: NSObject {
 
         }
         
+        if let features = dict["features"]as? String{
+            self.strDescription = features
+        }
+        
         if let duration = dict["validity"]as? String{
             strDuration = duration
         }else if let duration = dict["validity"]as? Int{

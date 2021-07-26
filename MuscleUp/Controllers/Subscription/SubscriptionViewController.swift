@@ -84,6 +84,8 @@ extension SubscriptionViewController:UICollectionViewDelegate,UICollectionViewDa
             cell.lblValidity.text = "Yearly"
         }
         
+        cell.lblPlanFeature.text = obj.strDescription
+        
         cell.btnChoose.tag = indexPath.row
         cell.btnChoose.addTarget(self, action: #selector(connected(sender:)), for: .touchUpInside)
 
@@ -160,7 +162,7 @@ extension SubscriptionViewController{
 
         objWebServiceManager.showIndicator()
         objWebServiceManager.requestGet(strURL: WsUrl.url_getSubscriptionList, params: nil, queryParams: [:], strCustomValidation: "", success: {response in
-            
+            print(response)
             let status = (response["status"] as? Int)
             let message = (response["message"] as? String)
             
