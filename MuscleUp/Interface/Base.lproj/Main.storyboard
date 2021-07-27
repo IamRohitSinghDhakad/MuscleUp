@@ -622,6 +622,7 @@
                         <outlet property="tfMobileNumber" destination="YdY-6m-cEx" id="YPs-ch-BFi"/>
                         <outlet property="tfPassword" destination="VSD-zo-mon" id="D4E-37-kyB"/>
                         <outlet property="vwBtnBg" destination="mGw-PZ-5eR" id="AXa-dR-3SK"/>
+                        <outlet property="vwDontHaveAccount" destination="FZX-ZV-Lru" id="EPl-Yq-77o"/>
                         <outlet property="vwEmail" destination="G1r-h5-xhu" id="l9e-TC-AtJ"/>
                         <outlet property="vwForgotPassword" destination="Uyd-VF-NPB" id="Mcv-aP-Dea"/>
                         <outlet property="vwFullName" destination="aCv-ly-6xZ" id="id0-p9-Fx7"/>
@@ -3532,7 +3533,7 @@
         <image name="meal" width="328" height="110"/>
         <image name="next" width="6.5" height="10.5"/>
         <image name="play" width="35.5" height="35.5"/>
-        <image name="pro" width="119" height="120"/>
+        <image name="pro" width="94.5" height="94.5"/>
         <image name="select" width="15.5" height="15.5"/>
         <image name="side_menu" width="24" height="18"/>
         <image name="two" width="330" height="159"/>

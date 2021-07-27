@@ -32,6 +32,7 @@ class LoginSignupViewController: UIViewController {
     
     @IBOutlet var btnLogin: UIButton!
     @IBOutlet var vwBtnBg: UIView!
+    @IBOutlet weak var vwDontHaveAccount: UIView!
     
     //Variables
     var isSignup:Bool = false
@@ -56,6 +57,7 @@ class LoginSignupViewController: UIViewController {
 
     
     func setUpForLogin(){
+        self.vwDontHaveAccount.isHidden = false
         self.vwMobileNumber.isHidden = true
         self.vwFullName.isHidden = true
         self.vwEmail.isHidden = false
@@ -75,7 +77,7 @@ class LoginSignupViewController: UIViewController {
         self.view.endEditing(true)
         self.tfEmail.text = ""
         self.tfPassword.text = ""
-        
+        self.vwDontHaveAccount.isHidden = true
         
         self.vwFullName.isHidden = self.vwFullName.isHidden ? false : true
         self.vwEmail.isHidden = false//self.vwEmail.isHidden ? false : true
@@ -133,7 +135,9 @@ class LoginSignupViewController: UIViewController {
     }
     
     @IBAction func btnRegisterLogin(_ sender: Any) {
-        self.setValidation()
+        isSignup = true
+        self.setUpForSignUp()
+       // self.setValidation()
     }
     @IBAction func btnCheckUncheckPrivacyPolicy(_ sender: Any) {
         if self.imgVwprivacyPolicyCheck.image == #imageLiteral(resourceName: "box"){
